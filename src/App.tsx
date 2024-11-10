@@ -8,6 +8,9 @@ const App: FC = () => (
     theme={{
       token: {
         fontFamily: 'Inter, sans-serif',
+        borderRadius: 4,
+        colorPrimary: '#da458f',
+        colorText: '#fff',
       },
     }}
   >

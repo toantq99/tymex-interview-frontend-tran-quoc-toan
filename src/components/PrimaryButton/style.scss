@@ -1,0 +1,15 @@
+.primary-button-wrapper {
+  background: transparent !important;
+  background-image: var(--primary-bg) !important;
+  box-shadow: 0px 0px 50px 0px #bb4bff52;
+  padding: 8px 20px;
+
+  span {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  }
+}

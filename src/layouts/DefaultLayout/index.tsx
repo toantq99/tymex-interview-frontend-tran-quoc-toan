@@ -1,20 +1,26 @@
 import { FC, PropsWithChildren } from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Space } from 'antd'
+
+import NavigationMenu from '../../components/NavigationMenu'
+import PrimaryButton from '../../components/PrimaryButton'
+import RegionSelector from '../../components/RegionSelector'
+
+import './style.scss'
 
 const DefaultLayout: FC<PropsWithChildren> = ({ children }) => (
-  <Layout>
+  <Layout
+    className="default-layout-wrapper"
+    style={{ backgroundImage: "url('/assets/images/background.png')" }}
+  >
     <Layout.Header>
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        items={[]}
-        style={{ flex: 1, minWidth: 0 }}
-      />
+      <NavigationMenu />
+      <Space size="large">
+        <PrimaryButton>Connect Wallet</PrimaryButton>
+        <RegionSelector />
+      </Space>
     </Layout.Header>
     <Layout.Content>{children}</Layout.Content>
     <Layout.Footer>Footer</Layout.Footer>
   </Layout>
 )
-
 export default DefaultLayout

@@ -1,0 +1,41 @@
+.navigation-menu-wrapper {
+  background-color: transparent;
+
+  .ant-menu {
+    &-item {
+      padding: 0 30px;
+      background-color: transparent !important;
+
+      &-selected {
+        .ant-menu-title-content {
+          background-image: var(--primary-bg);
+          color: transparent;
+          background-clip: text;
+
+          &::after {
+            position: absolute;
+            content: '';
+            width: 16px;
+            height: 2px;
+            background-image: var(--primary-bg);
+            bottom: -4px;
+            left: 4px;
+          }
+        }
+      }
+    }
+
+    &-title-content {
+      // font-family: Drone Ranger Pro;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+      text-align: center;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+      color: #fff;
+      text-transform: uppercase;
+      position: relative;
+    }
+  }
+}

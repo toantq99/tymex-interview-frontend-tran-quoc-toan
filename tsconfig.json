@@ -16,6 +16,7 @@
     "strict": true,
     "target": "es5"
   },
-  "include": ["src"],
-  "extends": "./tsconfig.paths.json"
+  "include": ["src"]
+  // TODO: Config alias
+  // "extends": "./tsconfig.paths.json"
 }
