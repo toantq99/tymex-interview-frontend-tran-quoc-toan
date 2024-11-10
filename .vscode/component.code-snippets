@@ -1,0 +1,6 @@
+{
+  "Import style.scss": {
+    "prefix": "imps",
+    "body": "import './style.scss'",
+  },
+}

@@ -1,0 +1,76 @@
+.product-filters-wrapper {
+  flex: 0 0 30%;
+
+  .ant-slider {
+    .ant-slider-rail {
+      background-color: #3a3841;
+    }
+    .ant-slider-track {
+      background-image: var(--primary-bg);
+    }
+
+    .ant-slider-mark {
+      top: 20px;
+
+      .ant-slider-mark-text {
+        color: #d6d6d6;
+        font-weight: 500;
+        font-size: 16px;
+        width: 50%;
+
+        &:first-child {
+          transform: translateX(0) !important;
+          text-align: left;
+        }
+
+        &:last-child {
+          transform: translateX(-100%) !important;
+          text-align: right;
+        }
+      }
+    }
+
+    // TODO: Match with design
+    // .ant-slider-step,
+    // .ant-slider-track,
+    // .ant-slider-rail {
+    //   height: 8px;
+    // }
+
+    // .ant-slider-handle {
+    //   height: 24px;
+    //   width: 24px;
+    // }
+  }
+
+  .ant-form-item {
+    &-label {
+      label {
+        color: var(--secondary-color);
+        font-weight: 600;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+    }
+
+    &:first-child {
+      margin-bottom: 40px;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+
+    .ant-btn {
+      width: 40%;
+
+      .anticon-close-circle {
+        color: #fbc625;
+      }
+    }
+  }
+}

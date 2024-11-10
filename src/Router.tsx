@@ -7,7 +7,7 @@ const delay = (time?: number) =>
   new Promise(resolve => setTimeout(resolve, time))
 
 const MarketPlace = lazy(() =>
-  delay(1000).then(() => import('./pages/MarketPlace'))
+  delay(0).then(() => import('./pages/MarketPlace'))
 )
 
 const Router: FC = () => (

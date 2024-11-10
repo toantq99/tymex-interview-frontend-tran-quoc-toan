@@ -1,1 +1,7 @@
-//
+.market-place-wrapper {
+  &-inner {
+    padding: 120px 160px;
+    display: flex;
+    gap: 40px;
+  }
+}

@@ -1,8 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
-import { Layout, Space } from 'antd'
+import { Button, Layout, Space } from 'antd'
 
 import NavigationMenu from '../../components/NavigationMenu'
-import PrimaryButton from '../../components/PrimaryButton'
 import RegionSelector from '../../components/RegionSelector'
 
 import './style.scss'
@@ -15,7 +14,9 @@ const DefaultLayout: FC<PropsWithChildren> = ({ children }) => (
     <Layout.Header>
       <NavigationMenu />
       <Space size="large">
-        <PrimaryButton>Connect Wallet</PrimaryButton>
+        <Button type="primary" size="large">
+          Connect Wallet
+        </Button>
         <RegionSelector />
       </Space>
     </Layout.Header>

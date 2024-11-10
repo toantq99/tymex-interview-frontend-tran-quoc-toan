@@ -11,6 +11,8 @@ const App: FC = () => (
         borderRadius: 4,
         colorPrimary: '#da458f',
         colorText: '#fff',
+        colorBorder: '#89888B',
+        controlOutlineWidth: 0,
       },
     }}
   >

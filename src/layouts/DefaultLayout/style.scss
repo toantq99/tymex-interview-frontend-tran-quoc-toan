@@ -1,6 +1,5 @@
 .default-layout-wrapper {
   width: 100%;
-  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,8 +7,10 @@
   .ant-layout-header {
     height: 84px;
     line-height: 84px;
-    position: sticky;
+    // position: sticky;
+    // top: 0;
     background-color: #17161ab2;
+    opacity: 0.7;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,7 +19,7 @@
       flex: 1;
     }
 
-    .primary-button-wrapper {
+    .ant-btn-primary {
       width: 160px;
       height: 40px;
     }

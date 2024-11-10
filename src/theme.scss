@@ -2,4 +2,17 @@ body {
   font-family: Inter, san-serif;
 
   --primary-bg: linear-gradient(91.47deg, #da458f -6%, #da34dd 113.05%);
+  --secondary-color: #89888b;
+
+  .ant-btn {
+    > span {
+      font-weight: 600;
+    }
+
+    &-primary {
+      background: transparent !important;
+      background-image: var(--primary-bg) !important;
+      box-shadow: 0px 0px 50px 0px #bb4bff52;
+    }
+  }
 }
