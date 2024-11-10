@@ -1,6 +1,18 @@
 import { FC } from 'react'
 import { ConfigProvider } from 'antd'
 
-const App: FC = () => <ConfigProvider>Content</ConfigProvider>
+import Router from './Router'
+
+const App: FC = () => (
+  <ConfigProvider
+    theme={{
+      token: {
+        fontFamily: 'Inter, sans-serif',
+      },
+    }}
+  >
+    <Router />
+  </ConfigProvider>
+)
 
 export default App
