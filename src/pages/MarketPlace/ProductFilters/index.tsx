@@ -106,8 +106,8 @@ const ProductFilters: FC = () => {
         <Form.Item name={'timeSort'} label="Time">
           <Select
             options={[
-              { label: 'Latest', value: 'latest' },
-              { label: 'Earliest', value: 'earliest' },
+              { label: 'Latest', value: 'desc' },
+              { label: 'Earliest', value: 'asc' },
             ]}
             allowClear
           />
@@ -115,8 +115,8 @@ const ProductFilters: FC = () => {
         <Form.Item name={'priceSort'} label="Price">
           <Select
             options={[
-              { label: 'Low to high', value: 'ascending' },
-              { label: 'High to low', value: 'descending' },
+              { label: 'Low to high', value: 'asc' },
+              { label: 'High to low', value: 'desc' },
             ]}
             allowClear
           />

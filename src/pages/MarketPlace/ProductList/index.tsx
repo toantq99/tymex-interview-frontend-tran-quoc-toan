@@ -2,20 +2,31 @@ import { FC, useEffect, useState } from 'react'
 import { Col, Row } from 'antd'
 
 import ProductCard from '../../../components/ProductCard'
+import axiosInstance from '../../../apis'
 import ProductCategories from '../ProductCategories'
+
+import { useProductFilters } from '../../../hooks/useProductFilters'
+
+import { convertProductFiltersToApiRequest } from '../../../helpers'
 
 import { IProduct } from '../../../types'
 
 import './style.scss'
 
 const ProductList: FC = () => {
-  const [products, setproducts] = useState<IProduct[]>([])
+  const { currentProductFilters, currentProductFiltersTimestamp } =
+    useProductFilters()
+
+  const [products, setProducts] = useState<IProduct[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:5005/products?_page=1')
-      .then(res => res.json())
-      .then(setproducts)
-  }, [])
+    axiosInstance
+      .get<IProduct[]>('/products', {
+        params: convertProductFiltersToApiRequest(currentProductFilters),
+      })
+      .then(res => setProducts(res.data))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProductFiltersTimestamp])
 
   return (
     <div className="product-list-wrapper">

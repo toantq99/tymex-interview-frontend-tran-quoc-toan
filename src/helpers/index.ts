@@ -52,3 +52,28 @@ export const extractProductFilters = (search: string): IProductFilters => {
     })(),
   }
 }
+
+export const convertProductFiltersToApiRequest = ({
+  search,
+  category,
+  priceRange,
+  priceSort,
+  theme,
+  tier,
+  timeSort,
+}: IProductFilters) => ({
+  theme,
+  tier,
+  ...(category && { category }),
+  ...(search && { q: search }),
+  ...(priceRange && {
+    price_gte: priceRange[0],
+    price_lte: priceRange[1],
+  }),
+  ...((priceSort || timeSort) && {
+    _sort: [timeSort && 'createdAt', priceSort && 'price']
+      .filter(Boolean)
+      .toString(),
+    _order: [timeSort, priceSort].filter(Boolean).toString(),
+  }),
+})

@@ -53,6 +53,6 @@ export interface IProductFilters
   extends Partial<Pick<IProduct, 'category' | 'theme' | 'tier'>> {
   search?: string
   priceRange?: number[]
-  timeSort?: 'latest' | 'earliest'
-  priceSort?: 'ascending' | 'descending'
+  timeSort?: 'asc' | 'desc'
+  priceSort?: 'asc' | 'desc'
 }
