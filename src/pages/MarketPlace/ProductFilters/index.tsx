@@ -98,7 +98,7 @@ const ProductFilters: FC = () => {
           />
         </Form.Item>
         <div className="action-buttons">
-          <Button type="text" ghost icon={<CloseCircleFilled />}>
+          <Button type="text" icon={<CloseCircleFilled />}>
             Reset filter
           </Button>
           <Button type="primary">Search</Button>

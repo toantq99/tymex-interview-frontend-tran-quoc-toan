@@ -1,14 +1,11 @@
 import { FC } from 'react'
-import { CaretDownOutlined, GlobalOutlined } from '@ant-design/icons'
-import { Space } from 'antd'
-
-import './style.scss'
+import { Flex } from 'antd'
 
 const RegionSelector: FC = () => (
-  <Space className="region-selector-wrapper">
-    <GlobalOutlined />
-    <CaretDownOutlined />
-  </Space>
+  <Flex className="region-selector-wrapper" align="center" gap={8}>
+    <img src="/assets/icons/globe.svg" />
+    <img src="/assets/icons/caret-down.svg" />
+  </Flex>
 )
 
 export default RegionSelector

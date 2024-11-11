@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { HeartFilled, HeartOutlined } from '@ant-design/icons'
-import { Button, Card, Flex, Tag } from 'antd'
+import { Button, Card, Flex, Tag, Typography } from 'antd'
 import classNames from 'classnames'
 
 import AuthorAvatar from '../AuthorAvatar'
@@ -36,9 +36,11 @@ const ProductCard: FC<{ product: IProduct }> = ({ product }) => {
         className="product-detail"
         align="flex-start"
         justify="space-between"
-        gap={4}
+        gap={12}
       >
-        <span className="product-name">{product.title}</span>
+        <Typography.Text ellipsis className="product-name">
+          {product.title}
+        </Typography.Text>
         <Flex className="product-price" gap={8} align="center">
           <img src="/assets/icons/ethereum.svg" />
           <span>{product.price}</span>
