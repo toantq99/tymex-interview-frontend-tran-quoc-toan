@@ -1,7 +1,9 @@
 .market-place-wrapper {
   &-inner {
-    padding: 120px 160px;
+    // padding: 120px 160px;
+    padding: 6% 8%;
     display: flex;
     gap: 40px;
+    overflow: hidden;
   }
 }

@@ -1,0 +1,20 @@
+.product-categories-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  overflow-x: auto;
+
+  .ant-btn {
+    padding: 10px 16px;
+    border: none;
+    color: #fff !important;
+
+    &-default {
+      background: linear-gradient(
+        91.47deg,
+        rgba(218, 69, 143, 0.4) -6%,
+        rgba(218, 52, 221, 0.4) 113.05%
+      ) !important;
+    }
+  }
+}
