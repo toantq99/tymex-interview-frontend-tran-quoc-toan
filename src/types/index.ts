@@ -15,6 +15,7 @@ export enum ProductTheme {
 }
 
 export enum ProductCategory {
+  All = '',
   UpperBody = 'Upper Body',
   LowerBody = 'Lower Body',
   Hat = 'Hat',
@@ -46,4 +47,12 @@ export interface IAuthor {
   gender: string
   avatar: string
   onlineStatus: string
+}
+
+export interface IProductFilters
+  extends Partial<Pick<IProduct, 'category' | 'theme' | 'tier'>> {
+  search?: string
+  priceRange?: number[]
+  timeSort?: 'latest' | 'earliest'
+  priceSort?: 'ascending' | 'descending'
 }

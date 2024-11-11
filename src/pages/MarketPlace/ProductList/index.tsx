@@ -12,7 +12,7 @@ const ProductList: FC = () => {
   const [products, setproducts] = useState<IProduct[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:5005/products')
+    fetch('http://localhost:5005/products?_page=1')
       .then(res => res.json())
       .then(setproducts)
   }, [])

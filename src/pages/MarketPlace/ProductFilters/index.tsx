@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { CloseCircleFilled, SearchOutlined } from '@ant-design/icons'
 import {
   Button,
@@ -10,14 +10,30 @@ import {
   theme,
 } from 'antd'
 
-import { ProductTheme, ProductTier } from '../../../types'
+import { useProductFilters } from '../../../hooks/useProductFilters'
+
+import { formatPrice } from '../../../helpers'
+
+import { IProductFilters, ProductTheme, ProductTier } from '../../../types'
 
 import './style.scss'
+
+type IProductFiltersForm = Pick<
+  IProductFilters,
+  'priceRange' | 'priceSort' | 'search' | 'theme' | 'tier' | 'timeSort'
+>
 
 const ProductFilters: FC = () => {
   const { token } = theme.useToken()
 
-  console.log(token)
+  const { currentProductFilters, updateFilters, resetFilters } =
+    useProductFilters()
+
+  const [form] = Form.useForm<IProductFiltersForm>()
+
+  useEffect(() => {
+    form.resetFields()
+  }, [form, currentProductFilters])
 
   return (
     <ConfigProvider
@@ -34,7 +50,18 @@ const ProductFilters: FC = () => {
       }}
       componentSize="large"
     >
-      <Form className="product-filters-wrapper" labelCol={{ span: 24 }}>
+      <Form<IProductFiltersForm>
+        className="product-filters-wrapper"
+        labelCol={{ span: 24 }}
+        form={form}
+        initialValues={currentProductFilters}
+        onFinish={updatedFilters =>
+          updateFilters({
+            ...updatedFilters,
+            category: currentProductFilters?.category,
+          })
+        }
+      >
         <Form.Item name={'search'}>
           <Input placeholder="Quick search" prefix={<SearchOutlined />} />
         </Form.Item>
@@ -44,64 +71,67 @@ const ProductFilters: FC = () => {
             max={200}
             min={0.01}
             marks={{
-              0.01: '0.01 ETH',
-              200: '200 ETH',
+              0.01: formatPrice(0.01),
+              200: formatPrice(200),
             }}
           />
         </Form.Item>
         <Form.Item name={'tier'} label="Tier">
           <Select
             options={[
-              { label: 'All', value: 'All' },
-              ...[
-                ProductTier.Basic,
-                ProductTier.Premium,
-                ProductTier.Deluxe,
-              ].map(tier => ({
-                label: tier,
-                value: tier,
-              })),
-            ]}
-            // arrow
+              ProductTier.Basic,
+              ProductTier.Premium,
+              ProductTier.Deluxe,
+            ].map(tier => ({
+              label: tier,
+              value: tier,
+            }))}
+            allowClear
           />
         </Form.Item>
         <Form.Item name={'theme'} label="Theme">
           <Select
             options={[
-              { label: 'All', value: 'All' },
-              ...[
-                ProductTheme.Dark,
-                ProductTheme.Light,
-                ProductTheme.Colorful,
-                ProductTheme.Halloween,
-              ].map(theme => ({
-                label: theme,
-                value: theme,
-              })),
-            ]}
+              ProductTheme.Dark,
+              ProductTheme.Light,
+              ProductTheme.Colorful,
+              ProductTheme.Halloween,
+            ].map(theme => ({
+              label: theme,
+              value: theme,
+            }))}
+            allowClear
           />
         </Form.Item>
-        <Form.Item name={'time'} label="Time">
+        <Form.Item name={'timeSort'} label="Time">
           <Select
             options={[
-              { label: 'Latest', value: 'Latest' },
-              { label: 'Earliest', value: 'Earliest' },
+              { label: 'Latest', value: 'latest' },
+              { label: 'Earliest', value: 'earliest' },
             ]}
+            allowClear
           />
         </Form.Item>
         <Form.Item name={'priceSort'} label="Price">
           <Select
             options={[
-              { label: 'Low to high', value: 'LowToHigh' },
-              { label: 'High to low', value: 'HighToLow' },
+              { label: 'Low to high', value: 'ascending' },
+              { label: 'High to low', value: 'descending' },
             ]}
+            allowClear
           />
         </Form.Item>
         <div className="action-buttons">
-          <Button type="text" icon={<CloseCircleFilled />}>
+          <Button
+            type="text"
+            icon={<CloseCircleFilled />}
+            onClick={() => resetFilters()}
+          >
             Reset filter
           </Button>
-          <Button type="primary">Search</Button>
+          <Button type="primary" onClick={() => form.submit()}>
+            Search
+          </Button>
         </div>
       </Form>
     </ConfigProvider>

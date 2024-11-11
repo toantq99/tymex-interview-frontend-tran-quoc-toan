@@ -47,6 +47,8 @@
     //   "no-underscore-dangle": "off",
     "arrow-body-style": "warn",
     "no-unused-vars": "warn",
+    "no-useless-rename": "error",
+    "object-shorthand": ["error", "always"],
     //   "object-curly-newline": [1, { "consistent": true }],
     //   "jsx-a11y/anchor-is-valid": [
     //     "error",

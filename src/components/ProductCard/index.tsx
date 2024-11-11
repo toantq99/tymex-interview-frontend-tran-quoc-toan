@@ -1,16 +1,22 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { HeartFilled, HeartOutlined } from '@ant-design/icons'
 import { Button, Card, Flex, Tag, Typography } from 'antd'
 import classNames from 'classnames'
 
 import AuthorAvatar from '../AuthorAvatar'
 
+import { formatPrice } from '../../helpers'
+
 import { IProduct } from '../../types'
 
 import './style.scss'
 
 const ProductCard: FC<{ product: IProduct }> = ({ product }) => {
-  const [isFav, setIsFav] = useState(false)
+  const [isFav, setIsFav] = useState(product.isFavorite)
+
+  useEffect(() => {
+    setIsFav(product.isFavorite)
+  }, [product.isFavorite])
 
   return (
     <Card className="product-card-wrapper" bordered={false}>
@@ -43,7 +49,7 @@ const ProductCard: FC<{ product: IProduct }> = ({ product }) => {
         </Typography.Text>
         <Flex className="product-price" gap={8} align="center">
           <img src="/assets/icons/ethereum.svg" />
-          <span>{product.price}</span>
+          <span>{formatPrice(product.price)}</span>
         </Flex>
       </Flex>
       <Flex className="author-detail" align="center" gap={12}>
