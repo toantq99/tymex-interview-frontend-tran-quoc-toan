@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react'
-import { Button, Layout, Space } from 'antd'
+import { Layout } from 'antd'
 
-import NavigationMenu from '../../components/NavigationMenu'
-import RegionSelector from '../../components/RegionSelector'
+import DefaultLayoutFooter from '../../components/DefaultLayoutFooter'
+import DefaultLayoutHeader from '../../components/DefaultLayoutHeader'
 
 import './style.scss'
 
@@ -11,17 +11,12 @@ const DefaultLayout: FC<PropsWithChildren> = ({ children }) => (
     className="default-layout-wrapper"
     style={{ backgroundImage: "url('/assets/images/background.png')" }}
   >
-    <Layout.Header>
-      <NavigationMenu />
-      <Space size="large">
-        <Button type="primary" size="large">
-          Connect Wallet
-        </Button>
-        <RegionSelector />
-      </Space>
-    </Layout.Header>
-    <Layout.Content>{children}</Layout.Content>
-    <Layout.Footer>Footer</Layout.Footer>
+    <DefaultLayoutHeader />
+    <Layout.Content>
+      {children}
+      <img src="/assets/images/footer-frame.png" width="100%" />
+    </Layout.Content>
+    <DefaultLayoutFooter />
   </Layout>
 )
 export default DefaultLayout

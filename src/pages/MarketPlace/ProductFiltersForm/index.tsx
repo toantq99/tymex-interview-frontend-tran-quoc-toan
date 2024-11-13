@@ -1,14 +1,8 @@
 import { FC, useEffect } from 'react'
 import { CloseCircleFilled, SearchOutlined } from '@ant-design/icons'
-import {
-  Button,
-  ConfigProvider,
-  Form,
-  Input,
-  Select,
-  Slider,
-  theme,
-} from 'antd'
+import { Button, Form, Input, Select, Slider } from 'antd'
+
+import InvertColorConfigProvider from '../../../components/InvertColorConfigProvider'
 
 import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
@@ -24,8 +18,6 @@ import './style.scss'
 type IProductFiltersForm = Pick<IProductListQuery, 'filters' | 'sorters'>
 
 const ProductFiltersForm: FC = () => {
-  const { token } = theme.useToken()
-
   const {
     currentFilters,
     currentSorters,
@@ -41,20 +33,7 @@ const ProductFiltersForm: FC = () => {
   }, [form, productListHistoryState?.timestamp])
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorBgContainer: 'transparent',
-          colorBgElevated: '#000',
-          controlItemBgActive: token.colorPrimary,
-          controlItemBgHover: '#89888b',
-          colorTextPlaceholder: '#89888b',
-          colorTextQuaternary: '#D6D6D6', // Arrow color
-          colorFillTertiary: '#da458f3d', // Button text hover color
-        },
-      }}
-      componentSize="large"
-    >
+    <InvertColorConfigProvider componentSize="large">
       <Form<IProductFiltersForm>
         className="product-filters-wrapper"
         labelCol={{ span: 24 }}
@@ -134,7 +113,7 @@ const ProductFiltersForm: FC = () => {
           </Button>
         </div>
       </Form>
-    </ConfigProvider>
+    </InvertColorConfigProvider>
   )
 }
 

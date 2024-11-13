@@ -3,6 +3,8 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
 import DefaultLayout from './layouts/DefaultLayout'
 
+import { NAVIGATION_ITEMS } from './constants/navigation'
+
 import { delay } from './helpers/general'
 
 const MarketPlace = lazy(() =>
@@ -14,7 +16,7 @@ const Router: FC = () => (
     <DefaultLayout>
       <Switch>
         <Suspense fallback="..Loading">
-          <Route path="/market-place">
+          <Route path={NAVIGATION_ITEMS.MARKETPLACE.path}>
             <MarketPlace />
           </Route>
           <Route
