@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.response.use(async response => {
-  await delay(1000)
+  await delay(500)
 
   return response
 })

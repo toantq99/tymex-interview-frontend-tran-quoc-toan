@@ -135,6 +135,10 @@ export const useFetchProductList = () => {
 
   const refreshProducts = useCallback(
     async ({ query }: { query: IProductListQuery }) => {
+      if (!productListState.products.length) {
+        return intialLoadProducts({ query })
+      }
+
       dispatch({ type: ProductListActionType.ResetProducts })
 
       const currentOffset = productListState.offset
@@ -152,7 +156,12 @@ export const useFetchProductList = () => {
         },
       })
     },
-    [loadProducts, productListState.offset, productListState.products.length]
+    [
+      intialLoadProducts,
+      loadProducts,
+      productListState.offset,
+      productListState.products.length,
+    ]
   )
 
   return {

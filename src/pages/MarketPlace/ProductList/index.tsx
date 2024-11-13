@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { Button, ConfigProvider, Flex, List } from 'antd'
 
 import ProductCard from '../../../components/ProductCard'
@@ -21,8 +21,11 @@ const ProductList: FC = () => {
     loadMoreProducts,
   } = useFetchProductList()
 
+  const refreshProductsInterval = useRef<NodeJS.Timer>()
+
   useEffect(() => {
-    if (productListHistoryState?.timestamp === 0) return
+    // TODO: Better handle concurrent requests
+    if (productListHistoryState?.timestamp === 0 || isLoading) return
 
     if (productListHistoryState?.fetchAction === 'reload') {
       refreshProducts({ query: currentProductListQuery })
@@ -32,6 +35,21 @@ const ProductList: FC = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productListHistoryState?.timestamp])
+
+  useEffect(() => {
+    if (!isLoading) {
+      refreshProductsInterval.current = setInterval(
+        () => refreshProducts({ query: currentProductListQuery }),
+        60 * 1000
+      )
+    }
+
+    return () => {
+      clearInterval(refreshProductsInterval.current)
+      refreshProductsInterval.current = undefined
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading])
 
   const loadMoreButton =
     !isLoading && hasMore ? (
