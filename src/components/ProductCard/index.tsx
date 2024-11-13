@@ -5,9 +5,9 @@ import classNames from 'classnames'
 
 import AuthorAvatar from '../AuthorAvatar'
 
-import { formatPrice } from '../../helpers'
+import { formatPrice } from '../../helpers/general'
 
-import { IProduct } from '../../types'
+import { IProduct } from '../../types/product'
 
 import './style.scss'
 

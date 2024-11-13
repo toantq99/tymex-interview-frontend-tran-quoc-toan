@@ -3,7 +3,7 @@ import { Button } from 'antd'
 
 import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
-import { ProductCategory } from '../../../types'
+import { ProductCategory } from '../../../enums/product'
 
 import './style.scss'
 

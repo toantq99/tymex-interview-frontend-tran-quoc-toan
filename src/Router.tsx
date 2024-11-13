@@ -3,7 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
 import DefaultLayout from './layouts/DefaultLayout'
 
-import { delay } from './helpers'
+import { delay } from './helpers/general'
 
 const MarketPlace = lazy(() =>
   delay(0).then(() => import('./pages/MarketPlace'))

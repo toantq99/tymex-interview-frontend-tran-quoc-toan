@@ -1,12 +1,10 @@
 import { Reducer } from 'react'
 
-import { mockProduct } from '../helpers'
+import { mockProduct } from '../helpers/product'
 
-import {
-  IProductListAction,
-  IProductListState,
-  ProductListActionType,
-} from '../types'
+import { ProductListActionType } from '../enums/product-list'
+
+import { IProductListAction, IProductListState } from '../types/product-list'
 
 export const initialProductListState: IProductListState = {
   products: [],
@@ -22,12 +20,6 @@ export const productListReducer: Reducer<
   IProductListState,
   IProductListAction
 > = (state, action) => {
-  console.log(
-    ProductListActionType[action.type],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (action as any)?.payload,
-    state
-  )
   switch (action.type) {
     case ProductListActionType.SetLoading:
       return { ...state, isLoading: action.payload.isLoading }

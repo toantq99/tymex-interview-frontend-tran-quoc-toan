@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Avatar, Badge } from 'antd'
 
-import { IAuthor } from '../../types'
+import { IAuthor } from '../../types/product'
 
 import './style.scss'
 

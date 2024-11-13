@@ -6,7 +6,7 @@ const MarketPlaceBanner: FC = () => (
   <div
     className="market-place-banner-wrapper"
     style={{ backgroundImage: "url('/assets/images/banner.jpeg')" }}
-  ></div>
+  />
 )
 
 export default MarketPlaceBanner

@@ -1,21 +1,10 @@
+import { ProductCategory } from '../enums/product'
+
 import {
-  IProduct,
   IProductListFilters,
   IProductListQuery,
   IProductListSorters,
-  ProductCategory,
-  ProductTheme,
-  ProductTier,
-} from '../types'
-
-export const delay = (timeout?: number) =>
-  new Promise(resolve => setTimeout(resolve, timeout))
-
-export const formatPrice = (rawPrice: number): string => {
-  if (Number.isNaN(Number(rawPrice))) return ''
-
-  return `${rawPrice.toLocaleString('vi-VN')} ETH`
-}
+} from '../types/product-list'
 
 export const composeProductListUrlSearchParams = ({
   filters,
@@ -99,49 +88,3 @@ export const convertProductListQueryToApiRequest = (
   _start: pagination.offset ?? 0,
   _limit: pagination.limit ?? 24,
 })
-
-export const mockProduct = (): IProduct => ({
-  id: 0,
-  title: '',
-  category: ProductCategory.All,
-  price: 0,
-  isFavorite: false,
-  createdAt: 0,
-  theme: ProductTheme.Colorful,
-  tier: ProductTier.Basic,
-  imageId: 0,
-  author: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    gender: '',
-    avatar: '',
-    onlineStatus: '',
-  },
-})
-
-export const isEqual = <T extends object>(obj1: T, obj2: T) => {
-  // Check properties in obj1
-  for (const key in obj1) {
-    if (Object.hasOwn(obj1, key)) {
-      if (Object.hasOwn(obj2, key)) {
-        // If values are different
-        if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) {
-          return false
-        }
-      } else {
-        // Property exists in obj1 but not in obj2
-        return false
-      }
-    }
-  }
-
-  // Check properties in obj2 that are not in obj1
-  for (const key in obj2) {
-    if (Object.hasOwn(obj2, key) && !Object.hasOwn(obj1, key)) {
-      return false
-    }
-  }
-
-  return true
-}

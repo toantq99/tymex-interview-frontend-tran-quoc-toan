@@ -12,14 +12,12 @@ import {
 
 import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
-import { formatPrice } from '../../../helpers'
+import { formatPrice } from '../../../helpers/general'
 
-import {
-  IProductListQuery,
-  ProductTheme,
-  ProductTier,
-  SortType,
-} from '../../../types'
+import { SortType } from '../../../enums/general'
+import { ProductTheme, ProductTier } from '../../../enums/product'
+
+import { IProductListQuery } from '../../../types/product-list'
 
 import './style.scss'
 

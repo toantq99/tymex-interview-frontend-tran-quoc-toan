@@ -1,17 +1,18 @@
 import { useCallback } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
+import { isEqual } from '../helpers/general'
 import {
   composeProductListUrlSearchParams,
   extractProductListQuery,
-  isEqual,
-} from '../helpers'
+} from '../helpers/product-list'
+
+import { ProductCategory } from '../enums/product'
 
 import {
   IProductListHistoryState,
   IProductListQuery,
-  ProductCategory,
-} from '../types'
+} from '../types/product-list'
 
 export const useProductListQuery = () => {
   const { search, state: productListHistoryState } =

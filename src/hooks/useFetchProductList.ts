@@ -4,17 +4,15 @@ import axiosInstance from '../apis'
 import {
   initialProductListState,
   productListReducer,
-} from '../reducers/products'
+} from '../reducers/product-list'
 
-import { convertProductListQueryToApiRequest } from '../helpers'
+import { convertProductListQueryToApiRequest } from '../helpers/product-list'
 
-import {
-  IProduct,
-  IProductListQuery,
-  IProductListState,
-  ProductCategory,
-  ProductListActionType,
-} from '../types'
+import { ProductCategory } from '../enums/product'
+import { ProductListActionType } from '../enums/product-list'
+
+import { IProduct } from '../types/product'
+import { IProductListQuery, IProductListState } from '../types/product-list'
 
 export const useFetchProductList = () => {
   const [productListState, dispatch] = useReducer(

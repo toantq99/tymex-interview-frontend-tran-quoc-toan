@@ -106,10 +106,12 @@
           ["^react", "^@?\\w"],
           ["/components", "/pages", "^\\.\\.(?!/?$)", "^\\.\\./?$"],
           ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
-          ["/hooks", "/hocs"],
+          ["/hooks"],
+          ["/hocs"],
           ["/constants"],
           ["/helpers"],
-          ["/enums", "/types"],
+          ["/enums"],
+          ["/types"],
           ["/styles", "^.+\\.(css|scss)$"]
         ]
       }

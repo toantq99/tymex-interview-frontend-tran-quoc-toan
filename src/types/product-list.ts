@@ -1,63 +1,13 @@
-/* eslint-disable no-unused-vars */
-// TODO: Fix eslint
+import { IProduct } from './product'
 
-export enum ProductTier {
-  Basic = 'Basic',
-  Premium = 'Premium',
-  Deluxe = 'Deluxe',
-}
-
-export enum ProductTheme {
-  Dark = 'Dark',
-  Light = 'Light',
-  Colorful = 'Colorful',
-  Halloween = 'Halloween',
-}
-
-export enum ProductCategory {
-  All = '',
-  UpperBody = 'Upper Body',
-  LowerBody = 'Lower Body',
-  Hat = 'Hat',
-  Shoes = 'Shoes',
-  Accessory = 'Accessory',
-  Legendary = 'Legendary',
-  Mythic = 'Mythic',
-  Epic = 'Epic',
-  Rare = 'Rare',
-}
-
-export interface IProduct {
-  id: number
-  title: string
-  category: ProductCategory
-  price: number
-  isFavorite: boolean
-  createdAt: number
-  theme: ProductTheme
-  tier: ProductTier
-  imageId: number // 1 -> 20 (integer)
-  author: IAuthor
-}
-
-export interface IAuthor {
-  firstName: string
-  lastName: string
-  email: string
-  gender: string
-  avatar: string
-  onlineStatus: string
-}
+import { SortType } from '../enums/general'
+import { ProductCategory } from '../enums/product'
+import { ProductListActionType } from '../enums/product-list'
 
 export interface IProductListFilters
   extends Partial<Pick<IProduct, 'theme' | 'tier'>> {
   search?: string
   priceRange?: number[]
-}
-
-export enum SortType {
-  Ascending = 'asc',
-  Descending = 'desc',
 }
 
 export interface IProductListSorters {
@@ -81,15 +31,9 @@ export interface IProductListState {
   totalProducts: number
 }
 
-export enum ProductListActionType {
-  SetLoading,
-  SetOffset,
-  SetLimit,
-  SetHasMore,
-  SetTotalProducts,
-  AppendLoadingProducts,
-  AppendProducts,
-  ResetProducts,
+export interface IProductListHistoryState {
+  timestamp?: number
+  fetchAction?: 'reload' | 'initialize'
 }
 
 export type IProductListAction =
@@ -124,8 +68,3 @@ export type IProductListAction =
       type: ProductListActionType.AppendProducts
       payload: { newProducts: IProduct[] }
     }
-
-export interface IProductListHistoryState {
-  timestamp?: number
-  fetchAction?: 'reload' | 'initialize'
-}
