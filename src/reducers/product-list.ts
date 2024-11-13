@@ -12,7 +12,7 @@ export const initialProductListState: IProductListState = {
   hasMore: true,
   isLoading: false,
   offset: 0,
-  limit: 4,
+  limit: 24,
   totalProducts: 0,
 }
 

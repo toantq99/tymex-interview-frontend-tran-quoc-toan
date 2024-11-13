@@ -35,9 +35,10 @@ const ProductList: FC = () => {
 
   const loadMoreButton =
     !isLoading && hasMore ? (
-      <Flex align="center" justify="center">
+      <Flex align="center" justify="center" className="view-more-btn">
         <Button
           type="primary"
+          size="large"
           onClick={() => loadMoreProducts({ query: currentProductListQuery })}
         >
           View more

@@ -2,4 +2,12 @@
   .ant-list-item {
     margin-block-end: 0 !important;
   }
+
+  .view-more-btn {
+    margin: 55px auto;
+
+    .ant-btn {
+      width: 326px;
+    }
+  }
 }
