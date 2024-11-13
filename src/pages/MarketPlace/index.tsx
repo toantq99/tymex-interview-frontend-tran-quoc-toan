@@ -1,7 +1,8 @@
 import { FC } from 'react'
 
 import MarketPlaceBanner from './MarketPlaceBanner'
-import ProductFilters from './ProductFilters'
+import ProductCategories from './ProductCategories'
+import ProductFiltersForm from './ProductFiltersForm'
 import ProductList from './ProductList'
 
 import './style.scss'
@@ -10,8 +11,11 @@ const MarketPlace: FC = () => (
   <article className="market-place-wrapper">
     <MarketPlaceBanner />
     <div className="market-place-wrapper-inner">
-      <ProductFilters />
-      <ProductList />
+      <ProductFiltersForm />
+      <div className="product-list-result-container">
+        <ProductCategories />
+        <ProductList />
+      </div>
     </div>
   </article>
 )

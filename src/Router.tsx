@@ -3,8 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
 import DefaultLayout from './layouts/DefaultLayout'
 
-const delay = (time?: number) =>
-  new Promise(resolve => setTimeout(resolve, time))
+import { delay } from './helpers'
 
 const MarketPlace = lazy(() =>
   delay(0).then(() => import('./pages/MarketPlace'))
@@ -22,7 +21,7 @@ const Router: FC = () => (
             path="/"
             exact
             render={() => <Redirect to="/market-place" />}
-          ></Route>
+          />
         </Suspense>
       </Switch>
     </DefaultLayout>

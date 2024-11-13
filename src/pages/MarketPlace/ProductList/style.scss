@@ -1,8 +1,5 @@
 .product-list-wrapper {
-  flex: 1;
-  overflow: hidden;
-
-  .product-categories-wrapper {
-    margin-bottom: 40px;
+  .ant-list-item {
+    margin-block-end: 0 !important;
   }
 }

@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 import { Button } from 'antd'
 
-import { useProductFilters } from '../../../hooks/useProductFilters'
+import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
 import { ProductCategory } from '../../../types'
 
@@ -24,29 +24,20 @@ const displayCategories: { label: ReactNode; category: ProductCategory }[] = [
 }))
 
 const ProductCategories: FC = () => {
-  const { updateFilters, currentProductFilters } = useProductFilters()
+  const { updateCategory, currentCategory } = useProductListQuery()
 
   return (
     <div className="product-categories-wrapper">
-      {displayCategories.map(({ label, category }) => {
-        const isActive = currentProductFilters?.category === category
-
-        return (
-          <Button
-            key={category}
-            size="large"
-            type={isActive ? 'primary' : 'default'}
-            onClick={() =>
-              updateFilters({
-                ...currentProductFilters,
-                category,
-              })
-            }
-          >
-            {label}
-          </Button>
-        )
-      })}
+      {displayCategories.map(({ label, category }) => (
+        <Button
+          key={category}
+          size="large"
+          type={currentCategory === category ? 'primary' : 'default'}
+          onClick={() => updateCategory(category)}
+        >
+          {label}
+        </Button>
+      ))}
     </div>
   )
 }

@@ -10,30 +10,37 @@ import {
   theme,
 } from 'antd'
 
-import { useProductFilters } from '../../../hooks/useProductFilters'
+import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
 import { formatPrice } from '../../../helpers'
 
-import { IProductFilters, ProductTheme, ProductTier } from '../../../types'
+import {
+  IProductListQuery,
+  ProductTheme,
+  ProductTier,
+  SortType,
+} from '../../../types'
 
 import './style.scss'
 
-type IProductFiltersForm = Pick<
-  IProductFilters,
-  'priceRange' | 'priceSort' | 'search' | 'theme' | 'tier' | 'timeSort'
->
+type IProductFiltersForm = Pick<IProductListQuery, 'filters' | 'sorters'>
 
-const ProductFilters: FC = () => {
+const ProductFiltersForm: FC = () => {
   const { token } = theme.useToken()
 
-  const { currentProductFilters, updateFilters, resetFilters } =
-    useProductFilters()
+  const {
+    currentFilters,
+    currentSorters,
+    productListHistoryState,
+    updateFiltersAndSorters,
+    resetFiltersAndSorters,
+  } = useProductListQuery()
 
   const [form] = Form.useForm<IProductFiltersForm>()
 
   useEffect(() => {
     form.resetFields()
-  }, [form, currentProductFilters])
+  }, [form, productListHistoryState?.timestamp])
 
   return (
     <ConfigProvider
@@ -54,18 +61,13 @@ const ProductFilters: FC = () => {
         className="product-filters-wrapper"
         labelCol={{ span: 24 }}
         form={form}
-        initialValues={currentProductFilters}
-        onFinish={updatedFilters =>
-          updateFilters({
-            ...updatedFilters,
-            category: currentProductFilters?.category,
-          })
-        }
+        initialValues={{ filters: currentFilters, sorters: currentSorters }}
+        onFinish={updateFiltersAndSorters}
       >
-        <Form.Item name={'search'}>
+        <Form.Item name={['filters', 'search']}>
           <Input placeholder="Quick search" prefix={<SearchOutlined />} />
         </Form.Item>
-        <Form.Item name={'priceRange'} label="Price">
+        <Form.Item name={['filters', 'priceRange']} label="Price">
           <Slider
             range
             max={200}
@@ -76,7 +78,7 @@ const ProductFilters: FC = () => {
             }}
           />
         </Form.Item>
-        <Form.Item name={'tier'} label="Tier">
+        <Form.Item name={['filters', 'tier']} label="Tier">
           <Select
             options={[
               ProductTier.Basic,
@@ -89,7 +91,7 @@ const ProductFilters: FC = () => {
             allowClear
           />
         </Form.Item>
-        <Form.Item name={'theme'} label="Theme">
+        <Form.Item name={['filters', 'theme']} label="Theme">
           <Select
             options={[
               ProductTheme.Dark,
@@ -103,20 +105,20 @@ const ProductFilters: FC = () => {
             allowClear
           />
         </Form.Item>
-        <Form.Item name={'timeSort'} label="Time">
+        <Form.Item name={['sorters', 'timeSort']} label="Time">
           <Select
             options={[
-              { label: 'Latest', value: 'desc' },
-              { label: 'Earliest', value: 'asc' },
+              { label: 'Latest', value: SortType.Descending },
+              { label: 'Earliest', value: SortType.Descending },
             ]}
             allowClear
           />
         </Form.Item>
-        <Form.Item name={'priceSort'} label="Price">
+        <Form.Item name={['sorters', 'priceSort']} label="Price">
           <Select
             options={[
-              { label: 'Low to high', value: 'asc' },
-              { label: 'High to low', value: 'desc' },
+              { label: 'Low to high', value: SortType.Descending },
+              { label: 'High to low', value: SortType.Descending },
             ]}
             allowClear
           />
@@ -125,7 +127,7 @@ const ProductFilters: FC = () => {
           <Button
             type="text"
             icon={<CloseCircleFilled />}
-            onClick={() => resetFilters()}
+            onClick={() => resetFiltersAndSorters()}
           >
             Reset filter
           </Button>
@@ -138,4 +140,4 @@ const ProductFilters: FC = () => {
   )
 }
 
-export default ProductFilters
+export default ProductFiltersForm

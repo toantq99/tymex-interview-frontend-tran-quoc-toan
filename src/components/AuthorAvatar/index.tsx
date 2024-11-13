@@ -17,7 +17,7 @@ const AuthorAvatar: FC<{ author: IAuthor }> = ({ author }) => (
             src={`/assets/icons/${author.onlineStatus === 'online' ? 'online' : 'offline'}.svg`}
           />
         }
-      ></Avatar>
+      />
     }
   >
     <Avatar src={author?.avatar} size={32} />

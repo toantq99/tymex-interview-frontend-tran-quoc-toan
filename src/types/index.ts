@@ -49,10 +49,83 @@ export interface IAuthor {
   onlineStatus: string
 }
 
-export interface IProductFilters
-  extends Partial<Pick<IProduct, 'category' | 'theme' | 'tier'>> {
+export interface IProductListFilters
+  extends Partial<Pick<IProduct, 'theme' | 'tier'>> {
   search?: string
   priceRange?: number[]
-  timeSort?: 'asc' | 'desc'
-  priceSort?: 'asc' | 'desc'
+}
+
+export enum SortType {
+  Ascending = 'asc',
+  Descending = 'desc',
+}
+
+export interface IProductListSorters {
+  timeSort?: SortType
+  priceSort?: SortType
+}
+
+export interface IProductListQuery {
+  filters: IProductListFilters
+  sorters: IProductListSorters
+  category: ProductCategory
+}
+
+export interface IProductListState {
+  products: IProduct[]
+  displayProducts: (IProduct & { isLoading?: boolean })[]
+  hasMore: boolean
+  isLoading: boolean
+  offset: number
+  limit: number
+  totalProducts: number
+}
+
+export enum ProductListActionType {
+  SetLoading,
+  SetOffset,
+  SetLimit,
+  SetHasMore,
+  SetTotalProducts,
+  AppendLoadingProducts,
+  AppendProducts,
+  ResetProducts,
+}
+
+export type IProductListAction =
+  | {
+      type: ProductListActionType.ResetProducts
+    }
+  | {
+      type: ProductListActionType.SetLoading
+      payload: { isLoading: boolean }
+    }
+  | {
+      type: ProductListActionType.SetLimit
+      payload: { limit: number }
+    }
+  | {
+      type: ProductListActionType.SetOffset
+      payload: { offset: number }
+    }
+  | {
+      type: ProductListActionType.SetHasMore
+      payload: { hasMore: boolean }
+    }
+  | {
+      type: ProductListActionType.SetTotalProducts
+      payload: { totalProducts: number }
+    }
+  | {
+      type: ProductListActionType.AppendLoadingProducts
+      payload: { limit: number; productCategory: ProductCategory }
+    }
+  | {
+      type: ProductListActionType.AppendProducts
+      payload: { newProducts: IProduct[] }
+    }
+
+export interface IProductListHistoryState {
+  timestamp?: number
+  fetchAction?: 'reload' | 'initialize'
 }

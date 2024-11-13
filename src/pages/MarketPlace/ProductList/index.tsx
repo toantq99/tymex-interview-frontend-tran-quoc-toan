@@ -1,43 +1,83 @@
-import { FC, useEffect, useState } from 'react'
-import { Col, Row } from 'antd'
+import { FC, useEffect } from 'react'
+import { Button, ConfigProvider, Flex, List } from 'antd'
 
 import ProductCard from '../../../components/ProductCard'
-import axiosInstance from '../../../apis'
-import ProductCategories from '../ProductCategories'
 
-import { useProductFilters } from '../../../hooks/useProductFilters'
-
-import { convertProductFiltersToApiRequest } from '../../../helpers'
-
-import { IProduct } from '../../../types'
+import { useFetchProductList } from '../../../hooks/useFetchProductList'
+import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
 import './style.scss'
 
 const ProductList: FC = () => {
-  const { currentProductFilters, currentProductFiltersTimestamp } =
-    useProductFilters()
+  const { productListHistoryState, currentProductListQuery } =
+    useProductListQuery()
 
-  const [products, setProducts] = useState<IProduct[]>([])
+  const {
+    isLoading,
+    displayProducts,
+    hasMore,
+    refreshProducts,
+    intialLoadProducts,
+    loadMoreProducts,
+  } = useFetchProductList()
 
   useEffect(() => {
-    axiosInstance
-      .get<IProduct[]>('/products', {
-        params: convertProductFiltersToApiRequest(currentProductFilters),
-      })
-      .then(res => setProducts(res.data))
+    if (productListHistoryState?.timestamp === 0) return
+
+    if (productListHistoryState?.fetchAction === 'reload') {
+      refreshProducts({ query: currentProductListQuery })
+    } else {
+      intialLoadProducts({ query: currentProductListQuery })
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentProductFiltersTimestamp])
+  }, [productListHistoryState?.timestamp])
+
+  const loadMoreButton =
+    !isLoading && hasMore ? (
+      <Flex align="center" justify="center">
+        <Button
+          type="primary"
+          onClick={() => loadMoreProducts({ query: currentProductListQuery })}
+        >
+          View more
+        </Button>
+      </Flex>
+    ) : null
 
   return (
     <div className="product-list-wrapper">
-      <ProductCategories />
-      <Row className="product-list-wrapper-inner" gutter={[40, 40]}>
-        {products.map(product => (
-          <Col key={product.id} xxl={6} md={8} sm={12}>
-            <ProductCard product={product} />
-          </Col>
-        ))}
-      </Row>
+      <ConfigProvider
+        theme={{
+          token: {
+            // For skeleton
+            colorFillContent: '#ffffff42',
+            colorFill: '#ffffff6b',
+          },
+        }}
+      >
+        <List
+          grid={{
+            gutter: [40, 40],
+            xs: 1,
+            sm: 1,
+            md: 2,
+            lg: 2,
+            xl: 3,
+            xxl: 4,
+          }}
+          dataSource={displayProducts}
+          loading={isLoading && !displayProducts.length}
+          itemLayout="horizontal"
+          loadMore={loadMoreButton}
+          rowKey="id"
+          renderItem={product => (
+            <List.Item>
+              <ProductCard product={product} isLoading={product.isLoading} />
+            </List.Item>
+          )}
+        />
+      </ConfigProvider>
     </div>
   )
 }

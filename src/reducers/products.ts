@@ -1,0 +1,87 @@
+import { Reducer } from 'react'
+
+import { mockProduct } from '../helpers'
+
+import {
+  IProductListAction,
+  IProductListState,
+  ProductListActionType,
+} from '../types'
+
+export const initialProductListState: IProductListState = {
+  products: [],
+  displayProducts: [],
+  hasMore: true,
+  isLoading: false,
+  offset: 0,
+  limit: 4,
+  totalProducts: 0,
+}
+
+export const productListReducer: Reducer<
+  IProductListState,
+  IProductListAction
+> = (state, action) => {
+  console.log(
+    ProductListActionType[action.type],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (action as any)?.payload,
+    state
+  )
+  switch (action.type) {
+    case ProductListActionType.SetLoading:
+      return { ...state, isLoading: action.payload.isLoading }
+
+    case ProductListActionType.SetLimit:
+      return { ...state, limit: action.payload.limit }
+
+    case ProductListActionType.SetOffset:
+      return { ...state, offset: action.payload.offset }
+
+    case ProductListActionType.SetHasMore:
+      return { ...state, hasMore: action.payload.hasMore }
+
+    case ProductListActionType.SetTotalProducts:
+      return { ...state, totalProducts: action.payload.totalProducts }
+
+    case ProductListActionType.AppendLoadingProducts: {
+      const timestamp = Date.now()
+
+      let numberOfLoadingProducts = action.payload.limit
+
+      if (state.totalProducts) {
+        numberOfLoadingProducts = Math.min(
+          numberOfLoadingProducts,
+          state.totalProducts - state.offset
+        )
+      }
+
+      return {
+        ...state,
+        displayProducts: state.displayProducts.concat(
+          [...new Array(numberOfLoadingProducts).keys()].map(index => ({
+            ...mockProduct(),
+            id: timestamp + index,
+            category: action.payload.productCategory,
+            isLoading: true,
+          }))
+        ),
+      }
+    }
+
+    case ProductListActionType.AppendProducts: {
+      const newProducts = state.products.concat(action.payload.newProducts)
+      return {
+        ...state,
+        displayProducts: newProducts,
+        products: newProducts,
+      }
+    }
+
+    case ProductListActionType.ResetProducts:
+      return initialProductListState
+
+    default:
+      return state
+  }
+}
