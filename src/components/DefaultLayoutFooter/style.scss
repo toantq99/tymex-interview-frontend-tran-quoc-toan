@@ -2,7 +2,7 @@
 
 .default-layout-footer-wrapper {
   background-color: #17161a;
-  padding: 60px 0;
+  padding: 60px 0 120px;
 
   &-inner {
     @include container;
@@ -11,6 +11,7 @@
   h4 {
     text-transform: uppercase;
     margin-bottom: 32px;
+    font-family: Drone Ranger Pro;
   }
 
   span.ant-typography {

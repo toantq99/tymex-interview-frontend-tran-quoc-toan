@@ -4,7 +4,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 import './styles/normalize.scss'
-import './styles/theme.scss'
+import './styles/app.scss'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(<App />)
