@@ -1,10 +1,12 @@
 import { FC } from 'react'
 import { Flex } from 'antd'
 
+import SvgIcon from '../SvgIcon'
+
 const RegionSelector: FC = () => (
   <Flex className="region-selector-wrapper" align="center" gap={8}>
-    <img src="/assets/icons/globe.svg" />
-    <img src="/assets/icons/caret-down.svg" />
+    <SvgIcon iconName="globe" />
+    <SvgIcon iconName="caret-down" />
   </Flex>
 )
 

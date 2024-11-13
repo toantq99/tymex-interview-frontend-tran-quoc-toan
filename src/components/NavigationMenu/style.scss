@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .navigation-menu-wrapper {
   background-color: transparent;
 
@@ -6,11 +8,15 @@
       padding: 0 30px;
       background-color: transparent !important;
 
+      &-active {
+        .ant-menu-title-content {
+          @include gradient-text;
+        }
+      }
+
       &-selected {
         .ant-menu-title-content {
-          background-image: var(--primary-bg);
-          color: transparent;
-          background-clip: text;
+          @include gradient-text;
 
           &::after {
             position: absolute;
@@ -36,6 +42,7 @@
       color: #fff;
       text-transform: uppercase;
       position: relative;
+      transition: none;
     }
   }
 }

@@ -12,8 +12,16 @@
     font-weight: 500;
   }
 
+  a span.ant-typography:hover {
+    text-decoration: underline;
+  }
+
   .ant-divider {
     border-block-start-color: #3a3841;
     margin: 60px 0 40px;
+  }
+
+  .ant-btn-primary {
+    width: 168px;
   }
 }

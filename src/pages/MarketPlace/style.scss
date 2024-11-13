@@ -1,4 +1,6 @@
 .market-place-wrapper {
+  position: relative;
+  top: calc(var(--header-height) * -1);
   &-inner {
     // padding: 120px 160px;
     padding: 6% 8%;

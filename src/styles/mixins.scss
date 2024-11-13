@@ -23,3 +23,9 @@
     background-color: $thumb-color;
   }
 }
+
+@mixin gradient-text {
+  background-image: var(--primary-bg);
+  color: transparent;
+  background-clip: text;
+}

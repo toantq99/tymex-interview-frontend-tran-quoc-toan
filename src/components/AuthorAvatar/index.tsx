@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import { Avatar, Badge } from 'antd'
 
+import SvgIcon from '../SvgIcon'
+
 import { IAuthor } from '../../types/product'
 
 import './style.scss'
@@ -13,8 +15,8 @@ const AuthorAvatar: FC<{ author: IAuthor }> = ({ author }) => (
         className="author-avatar-status"
         size={12}
         icon={
-          <img
-            src={`/assets/icons/${author.onlineStatus === 'online' ? 'online' : 'offline'}.svg`}
+          <SvgIcon
+            iconName={author.onlineStatus === 'online' ? 'online' : 'offline'}
           />
         }
       />

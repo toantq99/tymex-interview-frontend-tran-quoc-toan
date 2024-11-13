@@ -1,11 +1,14 @@
 import { FC } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Menu } from 'antd'
+
+import { NAVIGATION_ITEMS } from '../../constants/navigation'
 
 import './style.scss'
 
 const NavigationMenu: FC = () => {
   const { pathname } = useLocation()
+  const { push } = useHistory()
 
   return (
     <Menu
@@ -14,31 +17,17 @@ const NavigationMenu: FC = () => {
       mode="horizontal"
       selectedKeys={[pathname]}
       items={[
-        {
-          key: '/',
-          label: 'Home',
-        },
-        {
-          key: '/about-us',
-          label: 'About Us',
-        },
-        {
-          key: '/our-teams',
-          label: 'Our Teams',
-        },
-        {
-          key: '/market-place',
-          label: 'MarketPlace',
-        },
-        {
-          key: '/roadmap',
-          label: 'RoadMap',
-        },
-        {
-          key: '/whitepaper',
-          label: 'WhitePaper',
-        },
-      ]}
+        NAVIGATION_ITEMS.HOME,
+        NAVIGATION_ITEMS.ABOUT_US,
+        NAVIGATION_ITEMS.OUR_TEAMS,
+        NAVIGATION_ITEMS.MARKETPLACE,
+        NAVIGATION_ITEMS.ROADMAP,
+        NAVIGATION_ITEMS.WHITEPAPER,
+      ].map(navigationItem => ({
+        key: navigationItem.path,
+        label: navigationItem.label,
+        onClick: () => push(navigationItem.path),
+      }))}
     />
   )
 }

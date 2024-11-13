@@ -12,6 +12,7 @@ import {
 } from 'antd'
 
 import InvertColorConfigProvider from '../InvertColorConfigProvider'
+import SvgIcon from '../SvgIcon'
 
 import { NAVIGATION_ITEMS } from '../../constants/navigation'
 
@@ -75,7 +76,7 @@ const DefaultLayoutFooter: FC = () => (
           <Flex vertical gap={32}>
             <a href="tel:+01234568910" target="_blank" rel="noreferrer">
               <Flex gap={8}>
-                <img src="/assets/icons/phone.svg" />
+                <SvgIcon iconName="phone" />
                 <Typography.Text>01234568910</Typography.Text>
               </Flex>
             </a>
@@ -85,7 +86,7 @@ const DefaultLayoutFooter: FC = () => (
               rel="noreferrer"
             >
               <Flex gap={8}>
-                <img src="/assets/icons/email.svg" />
+                <SvgIcon iconName="email" />
                 <Typography.Text>tymex-talent@tyme.com</Typography.Text>
               </Flex>
             </a>

@@ -4,6 +4,7 @@ import { Button, Card, Flex, Skeleton, Tag, Typography } from 'antd'
 import classNames from 'classnames'
 
 import AuthorAvatar from '../AuthorAvatar'
+import SvgIcon from '../SvgIcon'
 
 import { formatPrice } from '../../helpers/general'
 
@@ -67,7 +68,7 @@ const ProductCard: FC<{ product: IProduct; isLoading?: boolean }> = ({
         </Skeleton>
         <Skeleton title paragraph={false} active loading={isLoading}>
           <Flex className="product-price" gap={8} align="center">
-            <img src="/assets/icons/ethereum.svg" />
+            <SvgIcon iconName="ethereum" />
             <span>{formatPrice(product.price)}</span>
           </Flex>
         </Skeleton>

@@ -1,14 +1,12 @@
 .default-layout-header-wrapper {
-  height: 84px;
-  line-height: 84px;
-  position: absolute;
-  top: 0;
-  width: 100%;
+  height: var(--header-height);
+  line-height: var(--header-height);
   background-color: #17161ab2;
   opacity: 0.7;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 
   .navigation-menu-wrapper {
     flex: 1;
