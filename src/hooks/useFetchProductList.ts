@@ -164,10 +164,15 @@ export const useFetchProductList = () => {
     ]
   )
 
+  const resetProductList = useCallback(() => {
+    dispatch({ type: ProductListActionType.ResetProducts })
+  }, [])
+
   return {
     ...productListState,
     intialLoadProducts,
     refreshProducts,
     loadMoreProducts,
+    resetProductList,
   }
 }

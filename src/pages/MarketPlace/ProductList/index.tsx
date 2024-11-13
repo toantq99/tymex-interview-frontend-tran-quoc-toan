@@ -20,6 +20,7 @@ const ProductList: FC = () => {
     refreshProducts,
     intialLoadProducts,
     loadMoreProducts,
+    resetProductList,
   } = useFetchProductList()
 
   const refreshProductsInterval = useRef<NodeJS.Timer>()
@@ -51,6 +52,8 @@ const ProductList: FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
+
+  useEffect(() => () => resetProductList(), [resetProductList])
 
   const loadMoreButton = (
     <Flex align="center" justify="center" className="view-more-btn">
