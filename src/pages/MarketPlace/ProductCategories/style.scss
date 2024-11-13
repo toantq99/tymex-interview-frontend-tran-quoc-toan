@@ -1,8 +1,13 @@
 .product-categories-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  overflow-x: auto;
+  margin-bottom: 40px;
+
+  &-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    overflow-x: auto;
+    margin: 0 32px 0 16px;
+  }
 
   .ant-btn {
     padding: 10px 16px;

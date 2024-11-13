@@ -3,16 +3,10 @@
     // padding: 120px 160px;
     padding: 6% 8%;
     display: flex;
-    gap: 40px;
-    overflow: hidden;
 
     .product-list-result-container {
       flex: 1;
       overflow: hidden;
-
-      .product-categories-wrapper {
-        margin-bottom: 40px;
-      }
     }
   }
 }

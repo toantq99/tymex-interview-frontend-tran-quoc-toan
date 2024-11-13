@@ -25,7 +25,7 @@ const ProductCard: FC<{ product: IProduct; isLoading?: boolean }> = ({
   }, [product.isFavorite])
 
   return (
-    <Card className="product-card-wrapper" bordered={false}>
+    <Card className="product-card-wrapper" bordered={false} hoverable>
       <div
         className={classNames(
           'product-image-container',

@@ -28,16 +28,18 @@ const ProductCategories: FC = () => {
 
   return (
     <div className="product-categories-wrapper">
-      {displayCategories.map(({ label, category }) => (
-        <Button
-          key={category}
-          size="large"
-          type={currentCategory === category ? 'primary' : 'default'}
-          onClick={() => updateCategory(category)}
-        >
-          {label}
-        </Button>
-      ))}
+      <div className="product-categories-wrapper-inner">
+        {displayCategories.map(({ label, category }) => (
+          <Button
+            key={category}
+            size="large"
+            type={currentCategory === category ? 'primary' : 'default'}
+            onClick={() => updateCategory(category)}
+          >
+            {label}
+          </Button>
+        ))}
+      </div>
     </div>
   )
 }

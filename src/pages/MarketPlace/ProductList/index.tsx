@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef } from 'react'
-import { Button, ConfigProvider, Flex, List } from 'antd'
+import { Button, ConfigProvider, Empty, Flex, List, Typography } from 'antd'
 
 import ProductCard from '../../../components/ProductCard'
 
@@ -51,25 +51,38 @@ const ProductList: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
-  const loadMoreButton =
-    !isLoading && hasMore ? (
-      <Flex align="center" justify="center" className="view-more-btn">
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => loadMoreProducts({ query: currentProductListQuery })}
-        >
-          View more
-        </Button>
-      </Flex>
-    ) : null
+  const loadMoreButton = hasMore ? (
+    <Flex align="center" justify="center" className="view-more-btn">
+      <Button
+        type="primary"
+        size="large"
+        onClick={async () => {
+          if (isLoading) return
+
+          const lastProductCard = document?.querySelector(
+            '.product-list-wrapper .ant-list .ant-row > div:last-child'
+          )
+
+          await loadMoreProducts({ query: currentProductListQuery })
+
+          if (lastProductCard?.nextElementSibling) {
+            lastProductCard.nextElementSibling.scrollIntoView({
+              behavior: 'smooth',
+            })
+          }
+        }}
+      >
+        View more
+      </Button>
+    </Flex>
+  ) : null
 
   return (
     <div className="product-list-wrapper">
       <ConfigProvider
         theme={{
           token: {
-            // For skeleton
+            // Invert skeleton color for dark background
             colorFillContent: '#ffffff42',
             colorFill: '#ffffff6b',
           },
@@ -77,7 +90,7 @@ const ProductList: FC = () => {
       >
         <List
           grid={{
-            gutter: [40, 40],
+            gutter: [36, 36],
             xs: 1,
             sm: 1,
             md: 2,
@@ -90,6 +103,16 @@ const ProductList: FC = () => {
           itemLayout="horizontal"
           loadMore={loadMoreButton}
           rowKey="id"
+          locale={{
+            emptyText: (
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description={
+                  <Typography.Title level={4}>No items found</Typography.Title>
+                }
+              />
+            ),
+          }}
           renderItem={product => (
             <List.Item>
               <ProductCard product={product} isLoading={product.isLoading} />

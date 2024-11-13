@@ -1,4 +1,12 @@
 .product-list-wrapper {
+  .ant-list {
+    .ant-spin-nested-loading {
+      padding: 2px 32px 16px 16px;
+      max-height: 80vh;
+      overflow: auto;
+    }
+  }
+
   .ant-list-item {
     margin-block-end: 0 !important;
   }
@@ -8,6 +16,14 @@
 
     .ant-btn {
       width: 326px;
+    }
+  }
+
+  .ant-empty {
+    .ant-typography {
+      background-image: var(--primary-bg);
+      color: transparent;
+      background-clip: text;
     }
   }
 }

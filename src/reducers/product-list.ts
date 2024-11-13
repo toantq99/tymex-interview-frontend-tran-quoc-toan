@@ -9,10 +9,10 @@ import { IProductListAction, IProductListState } from '../types/product-list'
 export const initialProductListState: IProductListState = {
   products: [],
   displayProducts: [],
-  hasMore: true,
+  hasMore: false,
   isLoading: false,
   offset: 0,
-  limit: 24,
+  limit: 6,
   totalProducts: 0,
 }
 
