@@ -16,6 +16,10 @@
 
     .ant-btn {
       width: 326px;
+
+      &.hidden {
+        visibility: hidden;
+      }
     }
   }
 

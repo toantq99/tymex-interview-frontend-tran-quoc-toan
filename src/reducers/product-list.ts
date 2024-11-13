@@ -44,7 +44,7 @@ export const productListReducer: Reducer<
       if (state.totalProducts) {
         numberOfLoadingProducts = Math.min(
           numberOfLoadingProducts,
-          state.totalProducts - state.offset
+          Math.max(state.totalProducts - state.offset, 0)
         )
       }
 

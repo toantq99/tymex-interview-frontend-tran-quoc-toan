@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from 'react'
 import { Button, ConfigProvider, Empty, Flex, List, Typography } from 'antd'
+import classNames from 'classnames'
 
 import ProductCard from '../../../components/ProductCard'
 
@@ -51,9 +52,10 @@ const ProductList: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
-  const loadMoreButton = hasMore ? (
+  const loadMoreButton = (
     <Flex align="center" justify="center" className="view-more-btn">
       <Button
+        className={classNames({ hidden: !hasMore })}
         type="primary"
         size="large"
         onClick={async () => {
@@ -75,7 +77,7 @@ const ProductList: FC = () => {
         View more
       </Button>
     </Flex>
-  ) : null
+  )
 
   return (
     <div className="product-list-wrapper">
