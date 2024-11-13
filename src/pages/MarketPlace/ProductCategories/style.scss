@@ -1,12 +1,12 @@
 .product-categories-wrapper {
-  margin-bottom: 40px;
+  overflow: hidden;
 
   &-inner {
     display: flex;
     align-items: center;
     gap: 24px;
     overflow-x: auto;
-    margin: 0 32px 0 16px;
+    margin: 0 32px 0 32px;
   }
 
   .ant-btn {

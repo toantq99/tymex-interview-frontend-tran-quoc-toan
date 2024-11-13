@@ -1,15 +1,14 @@
+@import '../../styles/mixins';
+
 .default-layout-header-wrapper {
-  height: var(--header-height);
-  line-height: var(--header-height);
-  padding: 0 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #17161ab2;
-  z-index: 1;
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   &.useMobileHeader {
-    --header-height: 64px;
+    --header-height: var(--mobile-header-height);
     position: sticky;
     top: 0;
     margin-bottom: 20px;

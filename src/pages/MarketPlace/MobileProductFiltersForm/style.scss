@@ -1,0 +1,53 @@
+.mobile-product-filters-form-navbar-wrapper {
+  --header-height: 44px;
+
+  width: 100%;
+  position: fixed;
+  top: var(--mobile-header-height);
+  left: 0;
+  padding-bottom: 12px;
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .ant-btn-primary {
+      flex: 0 1 auto;
+    }
+  }
+}
+
+.mobile-product-filters-form-drawer-wrapper {
+  .ant-drawer-content-wrapper {
+    max-width: 400px;
+  }
+
+  .ant-drawer-content {
+    background: #17161a;
+
+    .ant-drawer-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px;
+    }
+
+    .ant-drawer-header {
+      padding: 32px;
+
+      &-title {
+        flex-direction: row-reverse;
+
+        h3 {
+          margin: 0;
+        }
+      }
+    }
+
+    .ant-drawer-close {
+      margin: 0;
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import '../../styles/mixins';
+
+.transparent-navbar-wrapper {
+  height: var(--header-height);
+  line-height: var(--header-height);
+  padding: 0;
+  background-color: #17161ab2;
+  z-index: 1;
+
+  &-inner {
+    @include container;
+    height: 100%;
+  }
+}

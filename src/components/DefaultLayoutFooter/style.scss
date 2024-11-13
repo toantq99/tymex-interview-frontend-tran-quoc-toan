@@ -1,6 +1,12 @@
+@import '../../styles/mixins';
+
 .default-layout-footer-wrapper {
   background-color: #17161a;
-  padding: 60px 160px 200px;
+  padding: 60px 0;
+
+  &-inner {
+    @include container;
+  }
 
   h4 {
     text-transform: uppercase;

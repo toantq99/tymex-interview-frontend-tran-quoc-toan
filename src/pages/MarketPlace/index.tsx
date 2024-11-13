@@ -1,23 +1,41 @@
 import { FC } from 'react'
+import { Col, Grid, Row } from 'antd'
+import classNames from 'classnames'
 
 import MarketPlaceBanner from './MarketPlaceBanner'
+import MobileProductFiltersForm from './MobileProductFiltersForm'
 import ProductCategories from './ProductCategories'
 import ProductFiltersForm from './ProductFiltersForm'
 import ProductList from './ProductList'
 
 import './style.scss'
 
-const MarketPlace: FC = () => (
-  <article className={'market-place-wrapper'}>
-    <MarketPlaceBanner />
-    <div className="market-place-wrapper-inner">
-      <ProductFiltersForm />
-      <div className="product-list-result-container">
-        <ProductCategories />
-        <ProductList />
+const MarketPlace: FC = () => {
+  const { xl } = Grid.useBreakpoint()
+
+  const useMobileForm = !xl
+
+  return (
+    <article className={classNames('market-place-wrapper', { useMobileForm })}>
+      <MarketPlaceBanner />
+      <div className={'market-place-wrapper-inner'}>
+        {useMobileForm && <MobileProductFiltersForm />}
+        <Row gutter={16}>
+          {!useMobileForm && (
+            <Col xl={6}>
+              <ProductFiltersForm />
+            </Col>
+          )}
+          <Col xl={18} lg={24}>
+            <div className="product-list-result-container">
+              <ProductCategories />
+              <ProductList />
+            </div>
+          </Col>
+        </Row>
       </div>
-    </div>
-  </article>
-)
+    </article>
+  )
+}
 
 export default MarketPlace

@@ -17,7 +17,9 @@ import './style.scss'
 
 type IProductFiltersForm = Pick<IProductListQuery, 'filters' | 'sorters'>
 
-const ProductFiltersForm: FC = () => {
+const ProductFiltersForm: FC<{ closeDrawer?: () => void }> = ({
+  closeDrawer,
+}) => {
   const {
     currentFilters,
     currentSorters,
@@ -104,11 +106,20 @@ const ProductFiltersForm: FC = () => {
           <Button
             type="text"
             icon={<CloseCircleFilled />}
-            onClick={() => resetFiltersAndSorters()}
+            onClick={() => {
+              resetFiltersAndSorters()
+              closeDrawer?.()
+            }}
           >
             Reset filter
           </Button>
-          <Button type="primary" onClick={() => form.submit()}>
+          <Button
+            type="primary"
+            onClick={() => {
+              form.submit()
+              closeDrawer?.()
+            }}
+          >
             Search
           </Button>
         </div>
