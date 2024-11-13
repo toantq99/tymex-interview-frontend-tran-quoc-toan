@@ -8,7 +8,7 @@ import ProductList from './ProductList'
 import './style.scss'
 
 const MarketPlace: FC = () => (
-  <article className="market-place-wrapper">
+  <article className={'market-place-wrapper'}>
     <MarketPlaceBanner />
     <div className="market-place-wrapper-inner">
       <ProductFiltersForm />

@@ -1,12 +1,15 @@
 import { FC } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { Menu } from 'antd'
+import { Menu, MenuProps } from 'antd'
+import { MenuItemType } from 'antd/es/menu/interface'
 
 import { NAVIGATION_ITEMS } from '../../constants/navigation'
 
 import './style.scss'
 
-const NavigationMenu: FC = () => {
+const NavigationMenu: FC<
+  MenuProps & { onItemClick?: MenuItemType['onClick'] }
+> = ({ onItemClick, ...props }) => {
   const { pathname } = useLocation()
   const { push } = useHistory()
 
@@ -23,11 +26,15 @@ const NavigationMenu: FC = () => {
         NAVIGATION_ITEMS.MARKETPLACE,
         NAVIGATION_ITEMS.ROADMAP,
         NAVIGATION_ITEMS.WHITEPAPER,
-      ].map(navigationItem => ({
+      ].map<MenuItemType>(navigationItem => ({
         key: navigationItem.path,
         label: navigationItem.label,
-        onClick: () => push(navigationItem.path),
+        onClick: menu => {
+          push(navigationItem.path)
+          onItemClick?.(menu)
+        },
       }))}
+      {...props}
     />
   )
 }
