@@ -11,7 +11,6 @@ import { ProductCategory } from '../../enums/product'
 
 import { IProductListQuery } from '../../types/product-list'
 
-// Mock axiosInstance to control API response
 jest.mock('../../apis/', () => ({
   get: jest.fn(),
 }))
