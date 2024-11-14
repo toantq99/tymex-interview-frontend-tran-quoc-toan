@@ -41,61 +41,58 @@ export const useFetchProductList = () => {
         },
       })
 
-      await axiosInstance
-        .get<IProduct[]>('/products', {
+      try {
+        const response = await axiosInstance.get<IProduct[]>('/products', {
           params: convertProductListQueryToApiRequest(query, {
             offset,
             limit,
           }),
         })
-        .then(response => {
-          dispatch({
-            type: ProductListActionType.AppendProducts,
-            payload: { newProducts: response.data },
-          })
 
-          const totalProducts = Number(response.headers?.['x-total-count'])
-
-          if (!Number.isNaN(totalProducts)) {
-            const hasMore =
-              response.data?.length === limit && offset + limit < totalProducts
-
-            dispatch({
-              type: ProductListActionType.SetTotalProducts,
-              payload: { totalProducts },
-            })
-            dispatch({
-              type: ProductListActionType.SetHasMore,
-              payload: { hasMore },
-            })
-          } else {
-            dispatch({
-              type: ProductListActionType.SetTotalProducts,
-              payload: { totalProducts: 0 },
-            })
-            dispatch({
-              type: ProductListActionType.SetHasMore,
-              payload: { hasMore: false },
-            })
-          }
+        dispatch({
+          type: ProductListActionType.AppendProducts,
+          payload: { newProducts: response.data },
         })
-        .catch(() => {
-          dispatch({
-            type: ProductListActionType.AppendProducts,
-            payload: { newProducts: [] },
-          })
 
+        const totalProducts = Number(response.headers?.['x-total-count'])
+
+        if (!Number.isNaN(totalProducts)) {
+          const hasMore =
+            response.data?.length === limit && offset + limit < totalProducts
+
+          dispatch({
+            type: ProductListActionType.SetTotalProducts,
+            payload: { totalProducts },
+          })
+          dispatch({
+            type: ProductListActionType.SetHasMore,
+            payload: { hasMore },
+          })
+        } else {
+          dispatch({
+            type: ProductListActionType.SetTotalProducts,
+            payload: { totalProducts: 0 },
+          })
           dispatch({
             type: ProductListActionType.SetHasMore,
             payload: { hasMore: false },
           })
+        }
+      } catch {
+        dispatch({
+          type: ProductListActionType.AppendProducts,
+          payload: { newProducts: [] },
         })
-        .finally(() =>
-          dispatch({
-            type: ProductListActionType.SetLoading,
-            payload: { isLoading: false },
-          })
-        )
+        dispatch({
+          type: ProductListActionType.SetHasMore,
+          payload: { hasMore: false },
+        })
+      } finally {
+        dispatch({
+          type: ProductListActionType.SetLoading,
+          payload: { isLoading: false },
+        })
+      }
     },
     []
   )

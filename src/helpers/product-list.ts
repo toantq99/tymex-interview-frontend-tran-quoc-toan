@@ -18,7 +18,7 @@ export const composeProductListUrlSearchParams = ({
       const queryValue = flatQuery[queryProp as keyof typeof flatQuery]
 
       if (queryValue) {
-        searchParams.set(queryProp, encodeURIComponent(queryValue.toString()))
+        searchParams.set(queryProp, queryValue.toString())
       }
 
       return searchParams
@@ -32,7 +32,7 @@ export const extractProductListQuery = (search: string): IProductListQuery => {
   const getSearchParam = (key: string) => {
     const rawUrlValue = searchParams.get(key)
 
-    return rawUrlValue ? decodeURIComponent(rawUrlValue) : undefined
+    return rawUrlValue ?? undefined
   }
 
   return {
