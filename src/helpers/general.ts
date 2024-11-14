@@ -30,3 +30,24 @@ export const isEqual = <T extends object>(obj1: T, obj2: T) => {
 
   return true
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars
+export const debounce = <T extends (...args: any[]) => any>(
+  fn: T,
+  delay: number,
+  immediate: boolean = false
+) => {
+  let timeoutId: NodeJS.Timer
+
+  return (...args: Parameters<T>) => {
+    if (immediate && !timeoutId) {
+      fn(...args) // Execute the function immediately
+    }
+
+    clearTimeout(timeoutId)
+
+    timeoutId = setTimeout(() => {
+      fn(...args) // Execute the function after the specified delay
+    }, delay)
+  }
+}

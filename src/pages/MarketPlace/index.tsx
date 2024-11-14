@@ -23,7 +23,7 @@ const MarketPlace: FC = () => {
         <Row gutter={16}>
           {!useMobileForm && (
             <Col xl={6}>
-              <ProductFiltersForm />
+              <ProductFiltersForm searchOnTyping />
             </Col>
           )}
           <Col xl={18} lg={24}>

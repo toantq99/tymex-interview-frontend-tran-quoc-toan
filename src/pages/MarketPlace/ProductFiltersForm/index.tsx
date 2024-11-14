@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useMemo } from 'react'
 import { CloseCircleFilled, SearchOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Select, Slider } from 'antd'
 
@@ -6,7 +6,7 @@ import InvertColorConfigProvider from '../../../components/InvertColorConfigProv
 
 import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
-import { formatPrice } from '../../../helpers/general'
+import { debounce, formatPrice } from '../../../helpers/general'
 
 import { SortType } from '../../../enums/general'
 import { ProductTheme, ProductTier } from '../../../enums/product'
@@ -17,9 +17,10 @@ import './style.scss'
 
 type IProductFiltersForm = Pick<IProductListQuery, 'filters' | 'sorters'>
 
-const ProductFiltersForm: FC<{ closeDrawer?: () => void }> = ({
-  closeDrawer,
-}) => {
+const ProductFiltersForm: FC<{
+  closeDrawer?: () => void
+  searchOnTyping?: boolean
+}> = ({ closeDrawer, searchOnTyping }) => {
   const {
     currentFilters,
     currentSorters,
@@ -28,10 +29,21 @@ const ProductFiltersForm: FC<{ closeDrawer?: () => void }> = ({
     resetFiltersAndSorters,
   } = useProductListQuery()
 
+  const debouncedUpdateFiltersAndSorters = useMemo(
+    () => debounce(updateFiltersAndSorters, 1000),
+    [updateFiltersAndSorters]
+  )
+
   const [form] = Form.useForm<IProductFiltersForm>()
 
+  const initialValues: IProductFiltersForm = {
+    filters: currentFilters,
+    sorters: currentSorters,
+  }
+
   useEffect(() => {
-    form.resetFields()
+    form.setFieldsValue(initialValues)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form, productListHistoryState?.timestamp])
 
   return (
@@ -40,8 +52,18 @@ const ProductFiltersForm: FC<{ closeDrawer?: () => void }> = ({
         className="product-filters-wrapper"
         labelCol={{ span: 24 }}
         form={form}
-        initialValues={{ filters: currentFilters, sorters: currentSorters }}
+        initialValues={initialValues}
         onFinish={updateFiltersAndSorters}
+        {...(searchOnTyping && {
+          onValuesChange: (
+            changedValue: Partial<IProductFiltersForm>,
+            values
+          ) => {
+            if (Object.hasOwn(changedValue?.filters || {}, 'search')) {
+              debouncedUpdateFiltersAndSorters(values)
+            }
+          },
+        })}
       >
         <Form.Item name={['filters', 'search']}>
           <Input placeholder="Quick search" prefix={<SearchOutlined />} />
