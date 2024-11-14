@@ -28,7 +28,7 @@ const MarketPlace: FC = () => {
           )}
           <Col xl={18} lg={24}>
             <div className="product-list-result-container">
-              <ProductCategories />
+              {!useMobileForm && <ProductCategories />}
               <ProductList />
             </div>
           </Col>

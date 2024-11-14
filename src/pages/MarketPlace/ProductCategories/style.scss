@@ -1,18 +1,13 @@
 .product-categories-wrapper {
-  overflow: hidden;
-
-  &-inner {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    overflow-x: auto;
-    margin: 0 32px 0 32px;
-  }
+  padding: 0 32px 0 32px;
 
   .ant-btn {
-    padding: 10px 16px;
     border: none;
     color: #fff !important;
+
+    &-lg {
+      padding: 10px 16px;
+    }
 
     &-default {
       background: linear-gradient(

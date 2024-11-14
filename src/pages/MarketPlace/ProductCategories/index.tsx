@@ -1,45 +1,30 @@
-import { FC, ReactNode } from 'react'
-import { Button } from 'antd'
+import { FC } from 'react'
+import { Button, Flex } from 'antd'
+import classNames from 'classnames'
 
 import { useProductListQuery } from '../../../hooks/useProductListQuery'
 
-import { ProductCategory } from '../../../enums/product'
+import { DISPLAY_CATEGORIES } from '../../../constants/category'
 
 import './style.scss'
-
-const displayCategories: { label: ReactNode; category: ProductCategory }[] = [
-  ProductCategory.All,
-  ProductCategory.UpperBody,
-  ProductCategory.LowerBody,
-  ProductCategory.Hat,
-  ProductCategory.Shoes,
-  ProductCategory.Accessory,
-  ProductCategory.Legendary,
-  ProductCategory.Mythic,
-  ProductCategory.Epic,
-  ProductCategory.Rare,
-].map(category => ({
-  category,
-  label: category === ProductCategory.All ? 'All' : category,
-}))
 
 const ProductCategories: FC = () => {
   const { updateCategory, currentCategory } = useProductListQuery()
 
   return (
-    <div className="product-categories-wrapper">
-      <div className="product-categories-wrapper-inner">
-        {displayCategories.map(({ label, category }) => (
+    <div className={classNames('product-categories-wrapper')}>
+      <Flex className="product-categories-wrapper-inner" gap={20} wrap>
+        {DISPLAY_CATEGORIES.map(({ label, category }) => (
           <Button
             key={category}
-            size="large"
+            size={'large'}
             type={currentCategory === category ? 'primary' : 'default'}
             onClick={() => updateCategory(category)}
           >
             {label}
           </Button>
         ))}
-      </div>
+      </Flex>
     </div>
   )
 }

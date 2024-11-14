@@ -3,7 +3,7 @@
 
   width: 100%;
   position: fixed;
-  top: var(--mobile-header-height);
+  top: calc((var(--mobile-header-height)));
   left: 0;
   padding-bottom: 12px;
 
@@ -12,8 +12,8 @@
     justify-content: space-between;
     align-items: center;
 
-    .ant-btn-primary {
-      flex: 0 1 auto;
+    .ant-space {
+      flex: 0 1 200px;
     }
   }
 }

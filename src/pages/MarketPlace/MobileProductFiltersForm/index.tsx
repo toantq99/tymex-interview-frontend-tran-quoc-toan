@@ -1,14 +1,20 @@
 import { FC, useState } from 'react'
 import { FilterOutlined } from '@ant-design/icons'
-import { Button, Drawer, Typography } from 'antd'
+import { Button, Drawer, Select, Space, Typography } from 'antd'
 
+import InvertColorConfigProvider from '../../../components/InvertColorConfigProvider'
 import TransparentNavbar from '../../../components/TransparentNavbar'
 import ProductFiltersForm from '../ProductFiltersForm'
+
+import { useProductListQuery } from '../../../hooks/useProductListQuery'
+
+import { DISPLAY_CATEGORIES } from '../../../constants/category'
 
 import './style.scss'
 
 const MobileProductFiltersForm: FC = () => {
   const [openDrawer, setOpenDrawer] = useState(false)
+  const { updateCategory, currentCategory } = useProductListQuery()
 
   return (
     <>
@@ -24,6 +30,21 @@ const MobileProductFiltersForm: FC = () => {
         >
           Filter & Sort by
         </Button>
+        <InvertColorConfigProvider>
+          <Space>
+            <Typography.Text strong>Category</Typography.Text>
+            <Select
+              className="product-categories-select"
+              options={DISPLAY_CATEGORIES.map(({ label, category }) => ({
+                label,
+                value: category,
+              }))}
+              value={currentCategory}
+              onChange={updateCategory}
+              popupMatchSelectWidth={false}
+            />
+          </Space>
+        </InvertColorConfigProvider>
       </TransparentNavbar>
       <Drawer
         rootClassName="mobile-product-filters-form-drawer-wrapper"
