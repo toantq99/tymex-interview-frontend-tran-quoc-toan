@@ -1,5 +1,5 @@
 .product-categories-wrapper {
-  padding: 0 32px 0 32px;
+  padding: 0 32px;
 
   .ant-btn {
     border: none;
@@ -12,8 +12,8 @@
     &-default {
       background: linear-gradient(
         91.47deg,
-        rgba(218, 69, 143, 0.4) -6%,
-        rgba(218, 52, 221, 0.4) 113.05%
+        rgb(218 69 143 / 40%) -6%,
+        rgb(218 52 221 / 40%) 113.05%
       ) !important;
     }
   }

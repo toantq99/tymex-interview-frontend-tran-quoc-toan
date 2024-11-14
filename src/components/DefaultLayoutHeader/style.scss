@@ -9,6 +9,7 @@
 
   &.useMobileHeader {
     --header-height: var(--mobile-header-height);
+
     position: sticky;
     top: 0;
     margin-bottom: 20px;

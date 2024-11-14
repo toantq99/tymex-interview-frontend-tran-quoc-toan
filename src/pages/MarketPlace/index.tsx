@@ -18,7 +18,7 @@ const MarketPlace: FC = () => {
   return (
     <article className={classNames('market-place-wrapper', { useMobileForm })}>
       <MarketPlaceBanner />
-      <div className={'market-place-wrapper-inner'}>
+      <div className="market-place-wrapper-inner">
         {useMobileForm && <MobileProductFiltersForm />}
         <Row gutter={16}>
           {!useMobileForm && (

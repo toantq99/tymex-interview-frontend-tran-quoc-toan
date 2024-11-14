@@ -42,6 +42,7 @@ export const extractProductListQuery = (search: string): IProductListQuery => {
       search: getSearchParam('search') as IProductListFilters['search'],
       priceRange: (() => {
         const range = getSearchParam('priceRange')
+
         if (range) {
           const [min, max] = range.split(',')
 

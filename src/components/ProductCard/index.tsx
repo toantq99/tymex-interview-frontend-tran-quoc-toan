@@ -44,6 +44,7 @@ const ProductCard: FC<{ product: IProduct; isLoading?: boolean }> = ({
               className="product-thumbnail product-thumbnail-image"
               loading="lazy"
               src={getThumbnailUrl(product.imageId)}
+              alt={product.title}
             />
             <Tag className="product-category">{product.category}</Tag>
             <Button

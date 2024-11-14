@@ -1,5 +1,8 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
-  }
+  },
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"]
 }

@@ -19,7 +19,7 @@ const MobileProductFiltersForm: FC = () => {
   return (
     <>
       <TransparentNavbar
-        className={'mobile-product-filters-form-navbar-wrapper'}
+        className="mobile-product-filters-form-navbar-wrapper"
         innerClassName="mobile-product-filters-form-navbar-wrapper-inner"
       >
         <Button
@@ -49,7 +49,7 @@ const MobileProductFiltersForm: FC = () => {
       <Drawer
         rootClassName="mobile-product-filters-form-drawer-wrapper"
         placement="left"
-        width={'100%'}
+        width="100%"
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
         title={<Typography.Title level={3}>Filter & Sort by</Typography.Title>}

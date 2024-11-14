@@ -14,9 +14,14 @@ const DefaultLayout: FC<PropsWithChildren> = ({ children }) => (
     <DefaultLayoutHeader />
     <Layout.Content>
       {children}
-      <img src="/assets/images/footer-frame.png" width="100%" />
+      <img
+        src="/assets/images/footer-frame.png"
+        width="100%"
+        alt="footer-frame"
+      />
     </Layout.Content>
     <DefaultLayoutFooter />
   </Layout>
 )
+
 export default DefaultLayout

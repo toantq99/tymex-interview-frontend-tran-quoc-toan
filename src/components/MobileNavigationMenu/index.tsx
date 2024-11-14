@@ -12,7 +12,7 @@ const MobileNavigationMenu: FC = () => {
   return (
     <>
       <Button
-        className={'toggle-mobile-navigation-menu-btn-wrapper'}
+        className="toggle-mobile-navigation-menu-btn-wrapper"
         icon={<MenuOutlined />}
         type="text"
         size="large"

@@ -63,6 +63,7 @@ export const productListReducer: Reducer<
 
     case ProductListActionType.AppendProducts: {
       const newProducts = state.products.concat(action.payload.newProducts)
+
       return {
         ...state,
         displayProducts: newProducts,

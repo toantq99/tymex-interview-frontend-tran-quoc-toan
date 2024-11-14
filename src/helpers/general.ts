@@ -31,7 +31,7 @@ export const isEqual = <T extends object>(obj1: T, obj2: T) => {
   return true
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const debounce = <T extends (...args: any[]) => any>(
   fn: T,
   delay: number,

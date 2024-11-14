@@ -3,7 +3,7 @@
 .product-list-wrapper {
   .ant-list {
     .ant-spin-nested-loading {
-      padding: 2px 32px 16px 32px;
+      padding: 2px 32px 16px;
       max-height: 300vh;
       height: max-content;
       overflow: auto;
@@ -15,7 +15,7 @@
   }
 
   .view-more-btn {
-    margin: 55px auto 0 auto;
+    margin: 55px auto 0;
 
     .ant-btn {
       width: 326px;

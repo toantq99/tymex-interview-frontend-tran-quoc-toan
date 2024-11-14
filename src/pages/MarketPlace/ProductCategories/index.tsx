@@ -17,7 +17,7 @@ const ProductCategories: FC = () => {
         {DISPLAY_CATEGORIES.map(({ label, category }) => (
           <Button
             key={category}
-            size={'large'}
+            size="large"
             type={currentCategory === category ? 'primary' : 'default'}
             onClick={() => updateCategory(category)}
           >
