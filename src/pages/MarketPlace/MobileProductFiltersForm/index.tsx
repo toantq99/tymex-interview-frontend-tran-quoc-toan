@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { FilterOutlined } from '@ant-design/icons'
-import { Button, Drawer, Select, Space, Typography } from 'antd'
+import { Button, Drawer, Flex, Select, Typography } from 'antd'
 
 import InvertColorConfigProvider from '../../../components/InvertColorConfigProvider'
 import TransparentNavbar from '../../../components/TransparentNavbar'
@@ -31,7 +31,7 @@ const MobileProductFiltersForm: FC = () => {
           Filter & Sort by
         </Button>
         <InvertColorConfigProvider>
-          <Space>
+          <Flex gap={8} justify="flex-end" align="center">
             <Typography.Text strong>Category</Typography.Text>
             <Select
               className="product-categories-select"
@@ -43,7 +43,7 @@ const MobileProductFiltersForm: FC = () => {
               onChange={updateCategory}
               popupMatchSelectWidth={false}
             />
-          </Space>
+          </Flex>
         </InvertColorConfigProvider>
       </TransparentNavbar>
       <Drawer
