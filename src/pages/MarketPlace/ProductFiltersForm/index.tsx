@@ -30,7 +30,7 @@ const ProductFiltersForm: FC<{
   } = useProductListQuery()
 
   const debouncedUpdateFiltersAndSorters = useMemo(
-    () => debounce(updateFiltersAndSorters, 1000),
+    () => debounce(updateFiltersAndSorters, 800),
     [updateFiltersAndSorters]
   )
 

@@ -7,8 +7,11 @@ import NotFound from './pages/NotFound'
 import DefaultLayout from './layouts/DefaultLayout'
 
 import { NAVIGATION_ITEMS } from './constants/navigation'
+import { delay } from './helpers/general'
 
-const MarketPlace = lazy(() => import('./pages/MarketPlace'))
+const MarketPlace = lazy(() =>
+  delay(1000).then(() => import('./pages/MarketPlace'))
+)
 
 const Router: FC = () => (
   <BrowserRouter>

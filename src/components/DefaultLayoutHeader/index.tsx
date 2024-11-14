@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Button, Grid, Space } from 'antd'
+import { Button, Space } from 'antd'
 import classNames from 'classnames'
 
 import MobileNavigationMenu from '../MobileNavigationMenu'
@@ -8,20 +8,19 @@ import RegionSelector from '../RegionSelector'
 import TransparentNavbar from '../TransparentNavbar'
 
 import './style.scss'
+import { useBreakpoint } from '../../hooks/useBreakpoint'
 
 const DefaultLayoutHeader: FC = () => {
-  const { xl } = Grid.useBreakpoint()
-
-  const useMobileHeader = !xl
+  const { isCollapsed } = useBreakpoint()
 
   return (
     <TransparentNavbar
       className={classNames('default-layout-header-wrapper', {
-        useMobileHeader,
+        isCollapsed,
       })}
       innerClassName="default-layout-header-wrapper-inner"
     >
-      {useMobileHeader ? <MobileNavigationMenu /> : <NavigationMenu />}
+      {isCollapsed ? <MobileNavigationMenu /> : <NavigationMenu />}
       <Space size="large">
         <Button type="primary" size="large">
           Connect Wallet

@@ -34,16 +34,11 @@ export const isEqual = <T extends object>(obj1: T, obj2: T) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const debounce = <T extends (...args: any[]) => any>(
   fn: T,
-  delay: number,
-  immediate: boolean = false
+  delay: number
 ) => {
   let timeoutId: NodeJS.Timer
 
   return (...args: Parameters<T>) => {
-    if (immediate && !timeoutId) {
-      fn(...args) // Execute the function immediately
-    }
-
     clearTimeout(timeoutId)
 
     timeoutId = setTimeout(() => {

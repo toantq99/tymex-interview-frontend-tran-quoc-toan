@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { delay, formatPrice, isEqual } from '../general'
+import { debounce, delay, formatPrice, isEqual } from '../general'
 
 describe('delay function', () => {
   const measureTime = async (timeout?: number) => {
@@ -81,5 +81,69 @@ describe('isEqual function', () => {
     const obj2 = 'John'
     expect(isEqual(obj1, obj2 as any)).toBe(false)
     expect(isEqual(obj2 as any, obj1)).toBe(false)
+  })
+})
+
+// Mock function to be debounced
+const mockFunction = jest.fn()
+
+describe('debounce function', () => {
+  beforeEach(() => {
+    jest.useFakeTimers() // Mock the timers for control over setTimeout
+    mockFunction.mockClear()
+  })
+
+  afterEach(() => {
+    jest.runOnlyPendingTimers() // Run any pending timers after each test
+    jest.useRealTimers() // Restore real timers after tests are done
+  })
+
+  test('should call the function after the specified delay', () => {
+    const debouncedFunc = debounce(mockFunction, 1000)
+
+    debouncedFunc()
+    jest.advanceTimersByTime(999) // Fast-forward time by 999ms
+    expect(mockFunction).not.toBeCalled() // Function should not be called yet
+
+    jest.advanceTimersByTime(1) // Fast-forward the final 1ms to complete the delay
+    expect(mockFunction).toBeCalledTimes(1) // Function should be called once
+  })
+
+  test('should not call the function before the delay', () => {
+    const debouncedFunc = debounce(mockFunction, 1000)
+
+    debouncedFunc()
+    jest.advanceTimersByTime(500) // Fast-forward time by 500ms
+    expect(mockFunction).not.toBeCalled() // Function should not be called yet
+
+    jest.advanceTimersByTime(500) // Fast-forward time by 500ms (total of 1000ms)
+    expect(mockFunction).toBeCalledTimes(1) // Function should be called once
+  })
+
+  test('should reset the delay if called multiple times quickly', () => {
+    const debouncedFunc = debounce(mockFunction, 1000)
+
+    debouncedFunc()
+    jest.advanceTimersByTime(500) // Fast-forward time by 500ms
+    debouncedFunc() // Call again before the 1000ms delay is over
+
+    // The timer should reset, so the function is not called yet
+    jest.advanceTimersByTime(300) // Fast-forward another 300ms
+    expect(mockFunction).toBeCalledTimes(0)
+
+    jest.advanceTimersByTime(800) // Fast-forward the final 800
+    expect(mockFunction).toBeCalledTimes(1) // Function should be called once in total
+  })
+
+  test('should execute function only once after multiple rapid calls', () => {
+    const debouncedFunc = debounce(mockFunction, 500)
+
+    debouncedFunc()
+    debouncedFunc() // Call rapidly again
+    debouncedFunc() // Call again rapidly
+
+    // Only after 500ms should the function be called once
+    jest.advanceTimersByTime(500)
+    expect(mockFunction).toBeCalledTimes(1) // Function should be called only once
   })
 })

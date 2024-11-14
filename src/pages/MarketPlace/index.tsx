@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Col, Grid, Row } from 'antd'
+import { Col, Row } from 'antd'
 import classNames from 'classnames'
 
 import MarketPlaceBanner from './MarketPlaceBanner'
@@ -9,26 +9,25 @@ import ProductFiltersForm from './ProductFiltersForm'
 import ProductList from './ProductList'
 
 import './style.scss'
+import { useBreakpoint } from '../../hooks/useBreakpoint'
 
 const MarketPlace: FC = () => {
-  const { xl } = Grid.useBreakpoint()
-
-  const useMobileForm = !xl
+  const { isCollapsed } = useBreakpoint()
 
   return (
-    <article className={classNames('market-place-wrapper', { useMobileForm })}>
+    <article className={classNames('market-place-wrapper', { isCollapsed })}>
       <MarketPlaceBanner />
       <div className="market-place-wrapper-inner">
-        {useMobileForm && <MobileProductFiltersForm />}
+        {isCollapsed && <MobileProductFiltersForm />}
         <Row gutter={16}>
-          {!useMobileForm && (
+          {!isCollapsed && (
             <Col xl={6}>
               <ProductFiltersForm searchOnTyping />
             </Col>
           )}
           <Col xl={18} lg={24}>
             <div className="product-list-result-container">
-              {!useMobileForm && <ProductCategories />}
+              {!isCollapsed && <ProductCategories />}
               <ProductList />
             </div>
           </Col>

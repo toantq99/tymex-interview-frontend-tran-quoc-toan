@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SvgIcon Component renders match snap shot 1`] = `
+<img
+  alt="ethereum"
+  src="/assets/icons/ethereum.svg"
+/>
+`;

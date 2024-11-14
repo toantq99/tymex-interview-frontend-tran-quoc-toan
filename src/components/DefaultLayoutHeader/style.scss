@@ -7,7 +7,7 @@
     align-items: center;
   }
 
-  &.useMobileHeader {
+  &.isCollapsed {
     --header-height: var(--mobile-header-height);
 
     position: sticky;
